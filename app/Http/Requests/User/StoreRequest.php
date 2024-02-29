@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Family;
+namespace App\Http\Requests\User;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
 
     public function authorize()
@@ -18,13 +18,11 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'sometimes|required',
-            'document'=> 'sometimes|required',
-            'city'=> 'sometimes|required|string',
-            'phone'=> 'sometimes|required',
-            'address'=> 'sometimes|required',
-            'client_id'=> 'sometimes|required',
-            'relationship'=> 'sometimes|required',
+
+            'name'=> 'required',
+            'email'=> 'required|unique:users',
+            'password'=> 'required',
+            'role_id'=> 'required',
         ];
     }
 

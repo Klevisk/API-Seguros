@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Family;
+namespace App\Http\Requests\User;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
@@ -14,17 +14,13 @@ class UpdateRequest extends FormRequest
         return true;
     }
 
-
     public function rules()
     {
         return [
-            'name'=> 'sometimes|required',
-            'document'=> 'sometimes|required',
-            'city'=> 'sometimes|required|string',
-            'phone'=> 'sometimes|required',
-            'address'=> 'sometimes|required',
-            'client_id'=> 'sometimes|required',
-            'relationship'=> 'sometimes|required',
+            'name'=> 'required',
+            'email'=> 'required',
+            'password'=> 'required',
+            'role_id'=> 'required',
         ];
     }
 
@@ -36,5 +32,4 @@ class UpdateRequest extends FormRequest
             'data'    => $validator->errors(),
         ], 400));
     }
-
 }

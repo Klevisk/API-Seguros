@@ -1,21 +1,16 @@
 <?php
 
+namespace App\Http\Middleware;
 
- namespace App\Http\Middleware;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
- use Closure;
- use Illuminate\Http\Request;
- use Illuminate\Support\Facades\Auth;
+class Authenticate extends Middleware
+{
 
- class Authenticate
-  {
-    public function handle(Request $request, Closure $next){
-
-        if (!Auth::guard('sanctum')->check()) {
-            return response()->json(['error' => 'Unauthorized'],401);
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
         }
-        return $next($request);
-
     }
 }
-
