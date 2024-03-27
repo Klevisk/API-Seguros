@@ -18,20 +18,22 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'city' => 'required|string',
-            'document' => 'required|min:7|max:16|unique:clients',
+             'name' => 'required|string',
+             'email' => 'required',
+             'phone' => 'required|string',
+             'city' => 'required|string',
+             'address' => 'required|string',
+             'document' => 'required|min:7|max:16|unique:datos',
             'user_id' => 'required',
         ];
     }
 
-    public function messages(){
-        return [
-            'document'=> 'El documento ya existe en la base de datos.',
-        ] ;
-    }
+    // public function messages(){
+    //     return [
+    //         'document.unique' => 'El documento ya existe en la base de datos.',
+    //         'document'=> 'El documento ya existe en la base de datos.',
+    //     ] ;
+    // }
 
     public function failedValidation(Validator $validator)
     {

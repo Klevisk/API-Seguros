@@ -19,7 +19,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'document' => 'required|numeric|unique:providers',
+            'document' => 'required|numeric|unique:datos',
             'city' => 'required|string',
             'phone' => 'required|string',
             'address' => 'required|string',

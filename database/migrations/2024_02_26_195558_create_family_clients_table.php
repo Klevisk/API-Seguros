@@ -16,11 +16,7 @@ class CreateFamilyClientsTable extends Migration
         Schema::create('family_clients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('client_id')->constrained();
-            $table->string('name');
-            $table->string('document');
-            $table->string('city');
-            $table->string('phone');
-            $table->string('address');
+            $table->foreignId('dato_id')->constrained();
             $table->enum('relationship', ['spouse','child','parent']);
             $table->timestamps();
         });

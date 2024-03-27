@@ -16,12 +16,13 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'sometimes|required|string',
-            'email' => 'sometimes|required|email',
-            'phone' => 'sometimes|required|string',
-            'city' => 'sometimes|required|string',
-            'document' => 'sometimes|required|min:7|max:16',
-            'user_id' => 'sometimes|required',
+             'name' => 'sometimes|string',
+             'email' => 'sometimes|email',
+             'phone' => 'sometimes|string',
+             'city' => 'sometimes|string',
+             'document' => 'sometimes|required|min:7|max:16',
+             'address' => 'sometimes|string',
+             'user_id' => 'sometimes|required',
         ];
     }
 }

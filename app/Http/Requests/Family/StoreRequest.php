@@ -19,10 +19,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'name'=> 'required',
-            'document'=> 'required|unique:family_clients',
+            'document'=> 'required|unique:datos',
             'city'=> 'required|string',
             'phone'=> 'required',
             'address'=> 'required',
+            'email'=> 'required',
             'client_id'=> 'required',
             'relationship'=> 'required',
         ];

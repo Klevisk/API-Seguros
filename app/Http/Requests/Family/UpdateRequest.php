@@ -23,6 +23,7 @@ class UpdateRequest extends FormRequest
             'city'=> 'sometimes|required|string',
             'phone'=> 'sometimes|required',
             'address'=> 'sometimes|required',
+            'email'=> 'sometimes|required',
             'client_id'=> 'sometimes|required',
             'relationship'=> 'sometimes|required',
         ];

@@ -9,15 +9,22 @@ class Client extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'city',
-        'document',
+
         'user_id',
+         'dato_id'
     ] ;
 
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function datos()
+    {
+        return $this->belongsTo(Dato::class);
+    }
+
+    public function family()
+{
+    return $this->belongsTo(Family_client::class);
+}
 }

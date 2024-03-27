@@ -9,16 +9,18 @@ class Provider extends Model
 {
     use HasFactory;
 protected $fillable = [
-    'name',
-    'document',
-    'city',
-    'phone',
-    'address',
-    'email',
+
+    'dato_id'
 ] ;
 
 public function safe()
 {
     return $this->belongsToMany(Safe_type::class);
 }
+
+public function dato()
+{
+    return $this->belongsTo(Dato::class);
+}
+
 }

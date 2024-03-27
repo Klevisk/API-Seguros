@@ -6,30 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProvidersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('document')->unique();
-            $table->string('city');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('email')->nullable();
+            $table->foreignId('dato_id')->constrained();
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('providers');

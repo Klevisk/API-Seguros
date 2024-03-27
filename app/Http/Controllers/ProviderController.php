@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dato;
 use App\Models\Provider;
 use App\Http\Requests\Provider\StoreRequest;
 use App\Http\Requests\Provider\UpdateRequest;
@@ -14,6 +15,7 @@ class ProviderController extends Controller
     {
         $perPage = 10; // Número de elementos por página
 
+        $dato = Provider::with('datos')->get();
         $providers = Provider::paginate($perPage);
 
         return response()->json([
@@ -28,25 +30,48 @@ class ProviderController extends Controller
     {
         try {
             $validatedData = $request->validated();
+            $dato = Dato::create([
+                'name' => $validatedData['name'],
+                'document' => $validatedData['document'],
+                'city' => $validatedData['city'],
+                'phone' => $validatedData['phone'],
+                'email' => $validatedData['email'],
+                'address' => $validatedData['address'],
+            ]);
 
-            $providers = new Provider($validatedData);
-            $providers->save();
+            $provider = Provider::create([
 
-            return response()->json(['message' => 'Proveedor creado con éxito', 'providers' => $providers], 201);
+                'dato_id' =>$dato->id,
+            ]);
+
+
+
+            return response()->json(['message' => 'Proveedor creado con éxito', 'providers' => $provider], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
 
+
+
+
+
     public function update(UpdateRequest $request, $id)
     {
         try {
-            $providers = Provider::findOrFail($id);
             $validatedData = $request->validated();
 
+            $providers = Provider::findOrFail($id);
 
-            $providers->fill($validatedData);
-            $providers->save();
+
+            $providers->dato->update([
+                'name' => $validatedData['name'],
+                'document' => $validatedData['document'],
+                'city' => $validatedData['city'],
+                'phone' => $validatedData['phone'],
+                'email' => $validatedData['email'],
+                'address' => $validatedData['address'],
+            ]);
 
             return response()->json(['message' => 'Proveedor actualizado con éxito', 'providers' => $providers], 200);
         } catch (ModelNotFoundException $e) {
@@ -62,6 +87,7 @@ class ProviderController extends Controller
         try {
             $provider = Provider::findOrFail($id);
 
+            $provider->datos()->delete();
             $provider->delete();
 
             return response()->json(['message' => 'Proveedor eliminado con éxito'], 200);
